@@ -1,6 +1,7 @@
 package controle;
 
 import simulation.SITU;
+import surveillance.AgentGestionnaire;
 import visualisation.Vue;
 import anomalies.MAN;
 
@@ -27,9 +28,13 @@ public class Controleur {
 
 		// Initialisation de l'observateur de situation
 		situ=new SITU(ihm,simulationTime,echelle,firstStep);		
+		AgentGestionnaire gest= new AgentGestionnaire();
+		
+		
 		
 		start();
 	}
+	
 
 	public void pause() {
 		situ.pause();
