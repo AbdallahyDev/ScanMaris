@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 import simulation.SITUlistener;
+import surveillance.AdministratorAgent;
 import controle.Controleur;
 
 /**
@@ -33,7 +34,7 @@ public class Vue extends JFrame implements SITUlistener {
 	private final Controleur controleur;
 
 	private boolean pause=false;
-	
+	AdministratorAgent gestion;
 	private final JButton pauseB;
 	private final static String title="Situation en temps reel";
 
@@ -42,7 +43,7 @@ public class Vue extends JFrame implements SITUlistener {
 		super(title);
 		controleur=c;
 		ihm=new Environnement(largeur,hauteur,"/background2.jpg",tempsSimulation);
-
+		gestion=new AdministratorAgent();
 
 		// Creation d'un menu pour l'ihm
 		JMenuBar bar=new JMenuBar();
@@ -107,9 +108,14 @@ public class Vue extends JFrame implements SITUlistener {
 	 */
 	@Override
 	public void updateAll(ArrayList<ObjetAffichable> objets, int step) {
+		//System.out.println("ça marche");
+		
+		
 		pauseB.setEnabled(true);
 		this.setTitle(title+" : pas "+step);
 		ihm.updateAll(objets);		
+	
+		//gestion.start(objets);
 	}
 
 	public boolean isPause() {

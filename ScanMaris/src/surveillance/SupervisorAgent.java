@@ -5,7 +5,7 @@ import sun.management.resources.agent;
 import jade.core.AID;
 import jade.core.Agent;
 
-public class AgentSurveillant extends Agent {
+public class SupervisorAgent extends Agent {
 
 	/**
 	 * 
@@ -24,7 +24,7 @@ public class AgentSurveillant extends Agent {
 	    	
 	    	
 	        AID agentId=this.getAID();
-	        System.out.println("l'id est "+agentId);
+	        System.out.println("jje suis lancé mon id est "+agentId);
 	          // this.addBehaviour(new BuyerBehaviours(this, period));
 	      
 	    }
