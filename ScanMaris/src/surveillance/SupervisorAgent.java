@@ -20,12 +20,12 @@ public class SupervisorAgent extends Agent {
 		
 	    if (args != null) { 
 	    	
-	    	navire=(Navire) args[0];
+	    	//navire=(Navire) args[0];
 	    	
 	    	
 	        AID agentId=this.getAID();
-	        System.out.println("jje suis lancé mon id est "+agentId);
-	          // this.addBehaviour(new BuyerBehaviours(this, period));
+	        System.out.println("je suis lancé mon id est "+args[0]);
+	          //this.addBehaviour(new BuyerBehaviours(this, period));
 	      
 	    }
 	}

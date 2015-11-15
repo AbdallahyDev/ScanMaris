@@ -114,7 +114,7 @@ public class Vue extends JFrame implements SITUlistener {
 		pauseB.setEnabled(true);
 		this.setTitle(title+" : pas "+step);
 		ihm.updateAll(objets);		
-	
+		System.out.println("list size"+objets.size());
 		//gestion.start(objets);
 	}
 

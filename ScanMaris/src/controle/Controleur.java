@@ -25,7 +25,7 @@ public class Controleur {
 	private final SITU situ;
 	private final MAN moteur;
 	private AdministratorAgent AgentGestion;
-	private static AgentContainer container;
+	public static AgentContainer container;
 
 	public Controleur(int simulationTime, int alerte, int firstStep, int largeur, int hauteur, int echelle) throws StaleProxyException{
 		// Initialisation du moteur de regles
