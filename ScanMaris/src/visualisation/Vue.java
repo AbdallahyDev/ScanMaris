@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 import simulation.SITUlistener;
+import surveillance.AdministrartorBehaviour;
 import surveillance.AdministratorAgent;
 import controle.Controleur;
 
@@ -32,13 +33,15 @@ public class Vue extends JFrame implements SITUlistener {
 	private static final long serialVersionUID = 5242005945232250130L;
 	private final Environnement ihm;
 	private final Controleur controleur;
-
+	
 	private boolean pause=false;
 	AdministratorAgent gestion;
 	private final JButton pauseB;
 	private final static String title="Situation en temps reel";
-
-
+	
+	
+		
+	
 	public Vue(Controleur c,int largeur, int hauteur, int tempsSimulation){
 		super(title);
 		controleur=c;
@@ -114,7 +117,12 @@ public class Vue extends JFrame implements SITUlistener {
 		pauseB.setEnabled(true);
 		this.setTitle(title+" : pas "+step);
 		ihm.updateAll(objets);		
-		System.out.println("list size"+objets.size());
+		//System.out.println("list size"+objets.size());
+		AdministrartorBehaviour adminBehviour = new AdministrartorBehaviour(new AdministratorAgent(),10000);
+		adminBehviour.setObjets(objets);
+		adminBehviour.setStep(step);
+		
+		
 		//gestion.start(objets);
 	}
 

@@ -59,7 +59,7 @@ public class AdministratorAgent extends Agent implements SITUlistener {
 	public void updateAll(ArrayList<ObjetAffichable> objets, int step) {
 		// TODO Auto-generated method stub
 		System.out.println("ça marche");
-		start(objets);
+		
 		
 	}
 	
@@ -67,13 +67,13 @@ public class AdministratorAgent extends Agent implements SITUlistener {
 	public void setup() {
 		Object[] args =this.getArguments();
 	    if (args != null) { 
-	    	System.out.println("la liste des arguments"+args[0]);
+	    	System.out.println(""+args[0]);
 	        String agentName=this.getAID().getName();
 	          // this.addBehaviour(new BuyerBehaviours(this, period));
 	      
 	    }else
 	    	System.out.print("is not started");
-	    this.addBehaviour(new AdministrartorBehaviour());
+	    this.addBehaviour(new AdministrartorBehaviour(this,10000));
 	}
 	
 	/**
@@ -81,21 +81,7 @@ public class AdministratorAgent extends Agent implements SITUlistener {
 	 */
 	
 	
-	public String start(ArrayList<ObjetAffichable> objets){
-		
-		for(int i=0; i<=objets.size();i++){
-			Object obj=objets.get(i);
-			if(obj instanceof Navire){			
-				try {
-					initAndRun(new SupervisorAgent(), "Surveillant "+((Navire) obj).getId(), new Object[]{obj});
-				} catch (StaleProxyException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		return "the begin is done";
-	}
+	
 	
 	
 	public void takeDown(){

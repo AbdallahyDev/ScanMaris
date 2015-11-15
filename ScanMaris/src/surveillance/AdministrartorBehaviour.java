@@ -4,37 +4,106 @@ package surveillance;
 import java.util.ArrayList;
 
 import controle.Controleur;
+import simulation.Navire;
 import simulation.SITUlistener;
 import visualisation.ObjetAffichable;
+import visualisation.Vue;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
+import jade.core.behaviours.TickerBehaviour;
+import jade.domain.introspection.SuspendedAgent;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 
-public class AdministrartorBehaviour extends OneShotBehaviour implements SITUlistener{
+public class AdministrartorBehaviour extends TickerBehaviour implements SITUlistener{
 
-	private int b=1;
+	public AdministrartorBehaviour(Agent a, long period) {
+		super(a, period);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	//private int b=1;
+	Vue vue;
+	boolean b=true;
+	private static ArrayList<ObjetAffichable> objets;
+	private static int step;
+	
+
 	//private static AgentContainer container;
-	@Override
+	/*@Override
 	public void action() {
-		// TODO Auto-generated method stub
-		try {
-			initAndRun(new SupervisorAgent(), "Surveillant", new Object[]{"Supervisor!"});
-		} catch (StaleProxyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int lastSize=0;
+		
+		if(getStep()!=0){
+		    
+			
+			
+			if(isB()){
+				System.out.println("I'm ready to call startAgent");
+				start(getObjets());
+				lastSize=getObjets().size();
+				setB(false);	
+			}
+			if((getObjets().size())>lastSize){
+				
+				setB(true);
+			}
 		}
+			
+	
 		
-		switch(b){
-		
-		case 1: System.out.println("I'm Administrator agent and I'm starting "+b);b++;  break;
-		case 2: System.out.println("I'm starting"+b);	break;
-		default: break;
+	}
+	*/
+	
+	
+	public boolean isB() {
+		return b;
+	}
+
+	public void setB(boolean b) {
+		this.b = b;
+	}
+
+	public ArrayList<ObjetAffichable> getObjets() {
+		return objets;
+	}
+
+	public void setObjets(ArrayList<ObjetAffichable> objets) {
+		this.objets = objets;
+	}
+
+	public int getStep() {
+		return step;
+	}
+
+	public void setStep(int step) {
+		this.step = step;
+	}
+
+
+/**
+ * starting a supervisor agents	
+ * @param objets
+ * @return
+ */
+public String start(ArrayList<ObjetAffichable> objets){
+	
+	    	
+		for(int i=0; i<objets.size();i++){
+						
+				try {
+					initAndRun(new SupervisorAgent(), "Surveillant "+i, new Object[]{objets.get(i)});
+				} catch (StaleProxyException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
 		}
-		//System.out.println("I'm starting");
-		
+		return "the begin is done";
 	}
 	
 private void initAndRun(Agent agent, String nickname, Object parametre[]) throws StaleProxyException{
@@ -52,6 +121,16 @@ private void initAndRun(Agent agent, String nickname, Object parametre[]) throws
 	public void updateAll(ArrayList<ObjetAffichable> objets, int step) {
 		// TODO Auto-generated method stub
 		System.out.println("ça marche à partir de Behaviour");
+	}
+
+
+
+	@Override
+	protected void onTick() {
+		// TODO Auto-generated method stub
+		//System.out.println("I'm ready to call startAgent");
+		start(getObjets());
+		
 	}
 	
 	/*public boolean done() {

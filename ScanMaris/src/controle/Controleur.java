@@ -38,7 +38,7 @@ public class Controleur {
 		situ=new SITU(ihm,simulationTime,echelle,firstStep);		
 		//AgentGestionnaire gest= new AgentGestionnaire();
 		
-		initAndRun(new AdministratorAgent(), "Gestionnaire", new Object[]{"Administrato!"});
+		initAndRun(new AdministratorAgent(), "Gestionnaire", new Object[]{"I'm the administrator agent and I start!"});
 		
 		
 		start();
