@@ -1,6 +1,8 @@
 package controle;
 
 import jade.core.Agent;
+import jade.core.Profile;
+import jade.core.ProfileImpl;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
@@ -30,13 +32,13 @@ public class Controleur {
 		moteur=new MAN(alerte);	
 		
 		ihm=new Vue(this,largeur,hauteur,simulationTime);
-		AgentGestion=new AdministratorAgent();
+		//AgentGestion=new AdministratorAgent();
 		 //AgentGestion.setup();
 		// Initialisation de l'observateur de situation
 		situ=new SITU(ihm,simulationTime,echelle,firstStep);		
 		//AgentGestionnaire gest= new AgentGestionnaire();
 		
-		initAndRun(AgentGestion, "Gestionnaire", new Object[]{""});
+		initAndRun(new AdministratorAgent(), "Gestionnaire", new Object[]{"Administrato!"});
 		
 		
 		start();
@@ -69,6 +71,16 @@ private void initAndRun(Agent agent, String nickname, Object parametre[]) throws
 
 
 	public static void main(String[] args) throws StaleProxyException{
+		
+		
+		//Récupérer l’environnement d’exécution 
+		jade.core.Runtime rt = jade.core.Runtime.instance(); 
+		// Créer un profil par défaut 
+		Profile p = new ProfileImpl();
+		// est equivalent à : // Profile p = new ProfileImpl(adresse_ip, 1099, adresse_ip :1099/JADE", true); 
+		// Créer un conteneur principal par défaut (i.e. sur cet hôte, port 1099) 
+		container = rt.createMainContainer(p);
+		
 		// Parametres de la simulation
 		// Pour accelerer ou ralentir la simulation
 		int simulationTime=3500;

@@ -30,7 +30,7 @@ public class AdministratorAgent extends Agent implements SITUlistener {
 	 
 	  
 	    
-	 
+	 /*
 	    public AdministratorAgent() {
 		
 	    	//Récupérer l’environnement d’exécution 
@@ -40,7 +40,7 @@ public class AdministratorAgent extends Agent implements SITUlistener {
 			// est equivalent à : // Profile p = new ProfileImpl(adresse_ip, 1099, adresse_ip :1099/JADE", true); 
 			// Créer un conteneur principal par défaut (i.e. sur cet hôte, port 1099) 
 			container = rt.createMainContainer(p);
-	}
+	}*/
 
 
 		@SuppressWarnings("unused")
@@ -67,12 +67,13 @@ public class AdministratorAgent extends Agent implements SITUlistener {
 	public void setup() {
 		Object[] args =this.getArguments();
 	    if (args != null) { 
-	    	System.out.println("la liste des arguments"+args[1]);
+	    	System.out.println("la liste des arguments"+args[0]);
 	        String agentName=this.getAID().getName();
 	          // this.addBehaviour(new BuyerBehaviours(this, period));
 	      
 	    }else
 	    	System.out.print("is not started");
+	    this.addBehaviour(new AdministrartorBehaviour());
 	}
 	
 	/**
@@ -94,7 +95,13 @@ public class AdministratorAgent extends Agent implements SITUlistener {
 			}
 		}
 		return "the begin is done";
-	} 
+	}
+	
+	
+	public void takeDown(){
+	    
+	    System.out.println("I'm killed");
+    }
 	
 
 }
