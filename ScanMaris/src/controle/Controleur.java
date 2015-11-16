@@ -7,6 +7,7 @@ import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
 import simulation.SITU;
+import surveillance.AdministrartorBehaviour;
 import surveillance.AdministratorAgent;
 import visualisation.Vue;
 import anomalies.MAN;
@@ -26,20 +27,20 @@ public class Controleur {
 	private final MAN moteur;
 	private AdministratorAgent AgentGestion;
 	public static AgentContainer container;
-
+	private int period=10000;
 	public Controleur(int simulationTime, int alerte, int firstStep, int largeur, int hauteur, int echelle) throws StaleProxyException{
 		// Initialisation du moteur de regles
 		moteur=new MAN(alerte);	
 		
 		ihm=new Vue(this,largeur,hauteur,simulationTime);
-		//AgentGestion=new AdministratorAgent();
-		 //AgentGestion.setup();
 		// Initialisation de l'observateur de situation
 		situ=new SITU(ihm,simulationTime,echelle,firstStep);		
-		//AgentGestionnaire gest= new AgentGestionnaire();
+		AdministrartorBehaviour adminBehaviour;
 		AdministratorAgent agent= new AdministratorAgent();
 		initAndRun(agent, "Gestionnaire", new Object[]{"I'm the administrator agent and I start!"});
-		situ.addAgentListener(agent);
+		adminBehaviour=new AdministrartorBehaviour(agent, period);
+		situ.addAgentListener(adminBehaviour);
+		agent.addBehaviour(adminBehaviour);
 		
 		start();
 	}

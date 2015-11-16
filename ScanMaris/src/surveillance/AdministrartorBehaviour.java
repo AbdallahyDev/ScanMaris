@@ -120,7 +120,8 @@ private void initAndRun(Agent agent, String nickname, Object parametre[]) throws
 	
 	public void updateAll(ArrayList<ObjetAffichable> objets, int step) {
 		// TODO Auto-generated method stub
-		System.out.println("ça marche à partir de Behaviour");
+		//System.out.println("ça marche de la part de l'agent administratorBehaviour");
+		setObjets(objets);
 	}
 
 
@@ -137,7 +138,7 @@ private void initAndRun(Agent agent, String nickname, Object parametre[]) throws
 		}
 		if((getObjets().size())>lastSize){
 			
-			setB(true);
+			//setB(true);
 		}
 		
 		
