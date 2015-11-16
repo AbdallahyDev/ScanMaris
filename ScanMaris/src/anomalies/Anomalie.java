@@ -20,8 +20,7 @@ public class Anomalie{
 	private Date endDate=null;
 	private double lastValue=-1;
 
-	public Anomalie(String type,double initValue,double decreasingValue,
-			double creasingValue){
+	public Anomalie(String type,double initValue,double creasingValue,double decreasingValue){
 		this.type=type;
 		this.initValue=initValue;
 		this.decreasingValue=decreasingValue;

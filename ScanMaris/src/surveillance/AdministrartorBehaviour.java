@@ -2,6 +2,7 @@ package surveillance;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import controle.Controleur;
 import simulation.Navire;
@@ -24,65 +25,9 @@ public class AdministrartorBehaviour extends TickerBehaviour implements SITUlist
 		// TODO Auto-generated constructor stub
 	}
 
-
-
-	//private int b=1;
-	Vue vue;
-	boolean b=true;
-	private static ArrayList<ObjetAffichable> objets;
-	private static int step;
-	private int lastSize=0;
-
-	//private static AgentContainer container;
-	/*@Override
-	public void action() {
-		
-		
-		if(getStep()!=0){
-		    
-			
-			
-			if(isB()){
-				System.out.println("I'm ready to call startAgent");
-				start(getObjets());
-				lastSize=getObjets().size();
-				setB(false);	
-			}
-			if((getObjets().size())>lastSize){
-				
-				setB(true);
-			}
-		}
-			
 	
-		
-	}
-	*/
-	
-	
-	public boolean isB() {
-		return b;
-	}
+	private static HashMap<Integer,SupervisorAgent> listeAgentNavire = new HashMap<Integer,SupervisorAgent>();
 
-	public void setB(boolean b) {
-		this.b = b;
-	}
-
-	public ArrayList<ObjetAffichable> getObjets() {
-		return objets;
-	}
-
-	public void setObjets(ArrayList<ObjetAffichable> objets) {
-		this.objets = objets;
-	}
-
-	public int getStep() {
-		return step;
-	}
-
-	public void setStep(int step) {
-		this.step = step;
-	}
 
 
 /**
@@ -90,19 +35,16 @@ public class AdministrartorBehaviour extends TickerBehaviour implements SITUlist
  * @param objets
  * @return
  */
-public String start(ArrayList<ObjetAffichable> objets){
-	
-	    	
-		for(int i=0; i<objets.size();i++){
-						
+public String startAgentSupervisor(Navire nav){
+	System.out.println("Navire : "+nav.getType());
 				try {
-					initAndRun(new SupervisorAgent(), "Surveillant "+i, new Object[]{objets.get(i)});
+					SupervisorAgent agent = new SupervisorAgent();
+					initAndRun(agent, "Surveillant "+nav.getType()+" : "+nav.getAIS(), new Object[]{nav});
+					listeAgentNavire.put(nav.getAIS(), agent);					
 				} catch (StaleProxyException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			
-		}
 		return "the begin is done";
 	}
 	
@@ -118,28 +60,29 @@ private void initAndRun(Agent agent, String nickname, Object parametre[]) throws
 	
 
 	
-	public void updateAll(ArrayList<ObjetAffichable> objets, int step) {
-		// TODO Auto-generated method stub
-		//System.out.println("ça marche de la part de l'agent administratorBehaviour");
-		setObjets(objets);
+	public void updateAll(ArrayList<ObjetAffichable> listeObjets, int step) {
+		if(step == 1){
+			for(int i=0; i<listeObjets.size();i++){
+				startAgentSupervisor((Navire)listeObjets.get(i));
+			}
+		}else{
+			for(int i=0; i<listeObjets.size();i++){
+				Navire nav = (Navire)listeObjets.get(i);
+				if(listeAgentNavire.containsKey(nav.getAIS())){
+					((SupervisorAgent)listeAgentNavire.get(nav.getAIS())).setNavire(nav);
+				}else{
+					startAgentSupervisor(nav);				
+				}
+			}
+		}
 	}
 
 
 
 	@Override
 	protected void onTick() {
-		// TODO Auto-generated method stub
-		//System.out.println("I'm ready to call startAgent");
-		if(isB()){
-			System.out.println("I'm ready to call startAgent");
-			start(getObjets());
-			lastSize=getObjets().size();
-			setB(false);	
-		}
-		if((getObjets().size())>lastSize){
 			
-			//setB(true);
-		}
+	
 		
 		
 	}

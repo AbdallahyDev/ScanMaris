@@ -111,19 +111,12 @@ public class Vue extends JFrame implements SITUlistener {
 	 */
 	@Override
 	public void updateAll(ArrayList<ObjetAffichable> objets, int step) {
-		//System.out.println("ça marche");
+		//System.out.println("ï¿½a marche");
 		
 		
 		pauseB.setEnabled(true);
 		this.setTitle(title+" : pas "+step);
 		ihm.updateAll(objets);		
-		//System.out.println("list size"+objets.size());
-		AdministrartorBehaviour adminBehviour = new AdministrartorBehaviour(new AdministratorAgent(),10000);
-		adminBehviour.setObjets(objets);
-		adminBehviour.setStep(step);
-		
-		
-		//gestion.start(objets);
 	}
 
 	public boolean isPause() {

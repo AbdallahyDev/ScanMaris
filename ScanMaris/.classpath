@@ -21,6 +21,6 @@
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.19/lib/servlet.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart-1.0.19/lib/swtgraphics2d.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="D:/M2 S9 SIAM/MCR/Jeremy/tp&amp;td/matériels/jade.jar"/>
+	<classpathentry kind="lib" path="/opt/jade.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

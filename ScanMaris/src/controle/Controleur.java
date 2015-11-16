@@ -27,7 +27,7 @@ public class Controleur {
 	private final MAN moteur;
 	private AdministratorAgent AgentGestion;
 	public static AgentContainer container;
-	private int period=10000;
+	private int period=1000;
 	public Controleur(int simulationTime, int alerte, int firstStep, int largeur, int hauteur, int echelle) throws StaleProxyException{
 		// Initialisation du moteur de regles
 		moteur=new MAN(alerte);	
@@ -36,11 +36,11 @@ public class Controleur {
 		// Initialisation de l'observateur de situation
 		situ=new SITU(ihm,simulationTime,echelle,firstStep);		
 		AdministrartorBehaviour adminBehaviour;
-		AdministratorAgent agent= new AdministratorAgent();
-		initAndRun(agent, "Gestionnaire", new Object[]{"I'm the administrator agent and I start!"});
-		adminBehaviour=new AdministrartorBehaviour(agent, period);
+		AgentGestion = new AdministratorAgent();
+		initAndRun(AgentGestion, "Gestionnaire", new Object[]{"I'm the administrator agent and I start!"});
+		adminBehaviour=new AdministrartorBehaviour(AgentGestion, period);
 		situ.addAgentListener(adminBehaviour);
-		agent.addBehaviour(adminBehaviour);
+		AgentGestion.addBehaviour(adminBehaviour);
 		
 		start();
 	}
@@ -74,12 +74,12 @@ private void initAndRun(Agent agent, String nickname, Object parametre[]) throws
 	public static void main(String[] args) throws StaleProxyException{
 		
 		
-		//Récupérer l’environnement d’exécution 
+		//Rï¿½cupï¿½rer lï¿½environnement dï¿½exï¿½cution 
 		jade.core.Runtime rt = jade.core.Runtime.instance(); 
-		// Créer un profil par défaut 
+		// Crï¿½er un profil par dï¿½faut 
 		Profile p = new ProfileImpl();
-		// est equivalent à : // Profile p = new ProfileImpl(adresse_ip, 1099, adresse_ip :1099/JADE", true); 
-		// Créer un conteneur principal par défaut (i.e. sur cet hôte, port 1099) 
+		// est equivalent ï¿½ : // Profile p = new ProfileImpl(adresse_ip, 1099, adresse_ip :1099/JADE", true); 
+		// Crï¿½er un conteneur principal par dï¿½faut (i.e. sur cet hï¿½te, port 1099) 
 		container = rt.createMainContainer(p);
 		
 		// Parametres de la simulation

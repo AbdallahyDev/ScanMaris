@@ -32,4 +32,11 @@ public class SupervisorAgent extends Agent {
 	    }
 	}
 
+	public void setNavire(Navire nav) {
+		// TODO Auto-generated method stub
+		this.navire = nav;
+		System.out.println("Navire : "+navire.getAIS()+" mis a jour");
+		
+	}
+
 }
