@@ -31,12 +31,12 @@ public class AdministrartorBehaviour extends TickerBehaviour implements SITUlist
 	boolean b=true;
 	private static ArrayList<ObjetAffichable> objets;
 	private static int step;
-	
+	private int lastSize=0;
 
 	//private static AgentContainer container;
 	/*@Override
 	public void action() {
-		int lastSize=0;
+		
 		
 		if(getStep()!=0){
 		    
@@ -117,7 +117,7 @@ private void initAndRun(Agent agent, String nickname, Object parametre[]) throws
 	    }
 	
 
-	@Override
+	
 	public void updateAll(ArrayList<ObjetAffichable> objets, int step) {
 		// TODO Auto-generated method stub
 		System.out.println("ça marche à partir de Behaviour");
@@ -129,14 +129,20 @@ private void initAndRun(Agent agent, String nickname, Object parametre[]) throws
 	protected void onTick() {
 		// TODO Auto-generated method stub
 		//System.out.println("I'm ready to call startAgent");
-		start(getObjets());
+		if(isB()){
+			System.out.println("I'm ready to call startAgent");
+			start(getObjets());
+			lastSize=getObjets().size();
+			setB(false);	
+		}
+		if((getObjets().size())>lastSize){
+			
+			setB(true);
+		}
+		
 		
 	}
 	
-	/*public boolean done() {
-		//b=b+1;
-		return (b==2);
-	}*/
 	
 	
 }

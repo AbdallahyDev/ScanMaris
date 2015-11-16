@@ -2,6 +2,7 @@ package simulation;
 
 import javax.swing.event.EventListenerList;
 
+import surveillance.AdministratorAgent;
 import visualisation.Vue;
 
 /**
@@ -84,6 +85,11 @@ public class SITU implements Runnable {
 	private void addIhmListener(Vue ihm) {
 		listeners.add(SITUlistener.class, ihm);			
 	}
+	
+	public void addAgentListener(AdministratorAgent a) {
+		listeners.add(SITUlistener.class, a);			
+	}
+
 
 	public int getSimulationStep() {
 		return simulationStep;

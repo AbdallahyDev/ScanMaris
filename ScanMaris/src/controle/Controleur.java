@@ -37,9 +37,9 @@ public class Controleur {
 		// Initialisation de l'observateur de situation
 		situ=new SITU(ihm,simulationTime,echelle,firstStep);		
 		//AgentGestionnaire gest= new AgentGestionnaire();
-		
-		initAndRun(new AdministratorAgent(), "Gestionnaire", new Object[]{"I'm the administrator agent and I start!"});
-		
+		AdministratorAgent agent= new AdministratorAgent();
+		initAndRun(agent, "Gestionnaire", new Object[]{"I'm the administrator agent and I start!"});
+		situ.addAgentListener(agent);
 		
 		start();
 	}

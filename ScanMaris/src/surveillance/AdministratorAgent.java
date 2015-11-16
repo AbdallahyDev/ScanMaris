@@ -70,10 +70,12 @@ public class AdministratorAgent extends Agent implements SITUlistener {
 	    	System.out.println(""+args[0]);
 	        String agentName=this.getAID().getName();
 	          // this.addBehaviour(new BuyerBehaviours(this, period));
+	    
 	      
 	    }else
 	    	System.out.print("is not started");
 	    this.addBehaviour(new AdministrartorBehaviour(this,10000));
+	    
 	}
 	
 	/**
